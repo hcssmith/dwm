@@ -10,9 +10,9 @@ static const char *fonts[]          = { "monospace:size=10" };
 static const char dmenufont[]       = "monospace:size=10";
 static const char col_gray1[]       = "#191970";
 static const char col_gray2[]       = "#191970";
-static const char col_gray3[]       = "#81a1c1";
-static const char col_gray4[]       = "#e5e9f0";
-static const char col_cyan[]        = "#4c566a";
+static const char col_gray3[]       = "#ffd700";
+static const char col_gray4[]       = "#ffd700";
+static const char col_cyan[]        = "#191970";
 static const char *colors[][3]      = {
 	/*               fg         bg         border   */
 	[SchemeNorm] = { col_gray3, col_gray1, col_gray2 },
