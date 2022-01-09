@@ -59,7 +59,7 @@
 
 /* enums */
 enum { CurNormal, CurResize, CurMove, CurLast }; /* cursor */
-enum { SchemeNorm, SchemeSel }; /* color schemes */
+enum { SchemeNorm, SchemeSel, SchemeOut }; /* color schemes */
 enum { NetSupported, NetWMName, NetWMState, NetWMCheck,
        NetWMFullscreen, NetActiveWindow, NetWMWindowType,
        NetWMWindowTypeDialog, NetClientList, NetLast }; /* EWMH atoms */
@@ -234,6 +234,7 @@ static int xerror(Display *dpy, XErrorEvent *ee);
 static int xerrordummy(Display *dpy, XErrorEvent *ee);
 static int xerrorstart(Display *dpy, XErrorEvent *ee);
 static void zoom(const Arg *arg);
+static void spawnprograms();
 
 /* variables */
 static const char broken[] = "broken";
@@ -2151,6 +2152,17 @@ zoom(const Arg *arg)
 	pop(c);
 }
 
+void
+spawnprograms()
+{
+    /* iterate through startup_programs and spawn each program */
+    for(int i = 0; i < sizeof(startup_programs) / sizeof(char **); i++)
+    {
+        Arg prog = {.v = startup_programs[i]};
+        spawn(&prog);
+    }
+}
+
 int
 main(int argc, char *argv[])
 {
@@ -2169,6 +2181,7 @@ main(int argc, char *argv[])
 		die("pledge");
 #endif /* __OpenBSD__ */
 	scan();
+    spawnprograms();
 	run();
 	cleanup();
 	XCloseDisplay(dpy);
