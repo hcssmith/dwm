@@ -20,12 +20,14 @@ static const Rule rules[] = {
 	/* class      instance    title       tags mask     isfloating   monitor */
 	{ "Gimp",     NULL,       NULL,       0,            1,           -1 },
 	{ "Firefox",  NULL,       NULL,       1 << 8,       0,           -1 },
+	{ "acme",     NULL,       NULL,       1,       0,           -1 },
 };
 
 /* layout(s) */
 static const float mfact     = 0.60; /* factor of master area size [0.05..0.95] */
 static const int nmaster     = 1;    /* number of clients in master area */
 static const int resizehints = 0;    /* 1 means respect size hints in tiled resizals */
+static const int lockfullscreen = 0; /* Force focus on full screen window */
 
 static const Layout layouts[] = {
 	/* symbol     arrange function */
@@ -53,17 +55,18 @@ static const char *bgcmd[]  = { "xsetroot","-solid","black", NULL };
 static const char *statuscmd[] = {"slstatus", NULL };
 static const char *lockcmd[] = {"slock", NULL };
 static const char *fontsrvcmd[] = {"fontsrv", NULL };
-static const char *acmecmd[] = {"acme", "-a", "-f", "/mnt/font/SourceCodePro-Regular/25a/font", NULL };
-static const char *tabbedbrowsercmd[] = { "tabbed", "surf", "-e", NULL };
+static const char *acmecmd[] = {"acme", "-a", "-f", "/mnt/font/SourceCodePro-Regular/20a/font", NULL };
+static const char *plumbercmd[] = {"plumber", NULL};
+static const char *tabbedbrowsercmd[] = { "tabbed", "-c", "surf", "-e", NULL };
 
 /* autostarts*/
-static const char **startup_programs[] = {bgcmd,statuscmd,fontsrvcmd};
+static const char **startup_programs[] = {bgcmd,statuscmd,fontsrvcmd,plumbercmd};
 
 static Key keys[] = {
 	/* modifier                     key        function        argument */
 	{ MODKEY,                       XK_p,      spawn,          {.v = dmenucmd } },
 	{ MODKEY|ShiftMask,             XK_Return, spawn,          {.v = termcmd } },
-	{ MODKEY|ShiftMask,  		XK_l,	   spawn, 	   {.v = lockcmd } },
+	{ MODKEY|ShiftMask,  	    	XK_l,	   spawn, 	       {.v = lockcmd } },
 	{ MODKEY,                       XK_y,      spawn,          {.v = tabbedbrowsercmd } },
 	{ MODKEY,                       XK_a,      spawn,          {.v = acmecmd } },
 	{ MODKEY,                       XK_b,      togglebar,      {0} },
