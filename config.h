@@ -6,8 +6,8 @@ static const unsigned int snap      = 32;       /* snap pixel */
 static const unsigned int gappx     = 10;
 static const int showbar            = 1;        /* 0 means no bar */
 static const int topbar             = 1;        /* 0 means bottom bar */
-static const char *fonts[]          = { "Source Code Pro:pixelsize=30:antialias=true:autohint=true" };
-static const char dmenufont[]       = { "Source Code Pro:pixelsize=30:antialias=true:autohint=true" };
+static const char *fonts[]          = { "Source Code Pro:pixelsize=20:antialias=true:autohint=true" };
+static const char dmenufont[]       = { "Source Code Pro:pixelsize=20:antialias=true:autohint=true" };
 #include "colourschemes.h"
 /* tagging */
 static const char *tags[] = { "1", "2", "3", "4", "5", "6", "7", "8", "9" };
@@ -55,12 +55,13 @@ static const char *bgcmd[]  = { "xsetroot","-solid","black", NULL };
 static const char *statuscmd[] = {"slstatus", NULL };
 static const char *lockcmd[] = {"slock", NULL };
 static const char *fontsrvcmd[] = {"fontsrv", NULL };
-static const char *acmecmd[] = {"acme", "-a", "-f", "/mnt/font/SourceCodePro-Regular/20a/font", NULL };
+//static const char *acmecmd[] = {"acme", "-a", "-f", "/mnt/font/SourceCodePro-Regular/20a/font", NULL };
+static const char *acmecmd[] = {"acme-editor", NULL };
 static const char *plumbercmd[] = {"plumber", NULL};
 static const char *tabbedbrowsercmd[] = { "tabbed", "-c", "surf", "-e", NULL };
 
 /* autostarts*/
-static const char **startup_programs[] = {bgcmd,statuscmd,fontsrvcmd,plumbercmd};
+static const char **startup_programs[] = {bgcmd,statuscmd};
 
 static Key keys[] = {
 	/* modifier                     key        function        argument */
