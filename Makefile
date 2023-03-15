@@ -43,16 +43,14 @@ install: all
 	mkdir -p ${DESTDIR}${MANPREFIX}/man1
 	sed "s/VERSION/${VERSION}/g" < dwm.1 > ${DESTDIR}${MANPREFIX}/man1/dwm.1
 	chmod 644 ${DESTDIR}${MANPREFIX}/man1/dwm.1
-	mkdir -p /usr/share/xsessions
-	cp dwm.desktop /usr/share/xsessions/dwm.desktop
-	cp dwm-error.desktop /usr/share/xsessions/dwm-error.desktop
-	chmod 644 /usr/share/xsessions/dwm.desktop
-	chmod 644 /usr/share/xsessions/dwm-error.desktop
+	mkdir -p ${DESTDIR}${PREFIX}/lib/share/xsessions
+	cp dwm.desktop ${DESTDIR}${PREFIX}/lib/share/xsessions/dwm.desktop
+	cp dwm-error.desktop ${DESTDIR}${PREFIX}/lib/share/xsessions/dwm-error.desktop
 
 uninstall:
 	rm -f ${DESTDIR}${PREFIX}/bin/dwm\
 		${DESTDIR}${MANPREFIX}/man1/dwm.1
-	rm -f /usr/share/xsessions/dwm.desktop
-	rm -f /usr/share/xsessions/dwm-error.desktop
+	rm -f ${DESTDIR}${PREFIX}/lib/share/xsessions/dwm.desktop
+	rm -f ${DESTDIR}${PREFIX}/lib/share/xsessions/dwm-error.desktop
 
 .PHONY: all options clean dist install uninstall
