@@ -20,6 +20,12 @@
  *
  * To understand everything else, start reading main().
  */
+#include <X11/Xatom.h>
+#include <X11/Xlib.h>
+#include <X11/Xproto.h>
+#include <X11/Xutil.h>
+#include <X11/cursorfont.h>
+#include <X11/keysym.h>
 #include <errno.h>
 #include <locale.h>
 #include <signal.h>
