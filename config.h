@@ -29,7 +29,7 @@ static const char *colors[][3] = {
 };
 
 /* tagging */
-static const char *tags[] = {"",  "",  "",  "", "󰀫","󰂡", "󱃮", "󰇂", "󱃠"};
+static const char *tags[] = {"󰖟",  "",  "",  "", "󰀫","󰂡", "󱃮", "󰇂", "󱃠"};
 
 static const Rule rules[] = {
     /* xprop(1):
@@ -88,6 +88,25 @@ static const char *voltog[] =       {"amixer", "sset", "Master", "toggle", NULL}
 static const char *voldown[] =      {"amixer", "sset", "Master", "5%-", NULL};
 static const char *lightdown[] =    {"light", "-U", "5", NULL};
 static const char *lightup[] =      {"light", "-A", "5", NULL};
+static const char *lockcmd[] =      {"slock", NULL};
+
+static void
+viewtag(const Arg *arg)
+{
+    unsigned int i, curtag = selmon->tagset[selmon->seltags];
+
+    for (i = 0; i < LENGTH(tags); i++) {
+        if (curtag & (1 << i))
+            break;
+    }
+
+    if (arg->i > 0)
+        i = (i + 1) % LENGTH(tags);
+    else
+        i = (i + LENGTH(tags) - 1) % LENGTH(tags);
+
+    view(&(Arg){ .ui = 1 << i });
+}
 
 static const Key keys[] = {
     /* modifier                     key        function        argument */
@@ -98,6 +117,7 @@ static const Key keys[] = {
     {MODKEY,                        XK_w,       spawn,          {.v = wificmd}},
     {MODKEY,                        XK_b,       spawn,          {.v = browsercmd}},
     {MODKEY,                        XK_s,       spawn,          {.v = srccmd}},
+    {MODKEY | ShiftMask,            XK_l,       spawn,          {.v = lockcmd}},
     {0,                XF86XK_AudioLowerVolume, spawn,          {.v = voldown}},
     {0,                XF86XK_AudioRaiseVolume, spawn,          {.v = volup}},
     {0,                XF86XK_AudioMute,        spawn,          {.v = voltog}},
@@ -110,7 +130,8 @@ static const Key keys[] = {
     {MODKEY,                        XK_h,       setmfact,       {.f = -0.05}},
     {MODKEY,                        XK_l,       setmfact,       {.f = +0.05}},
     {MODKEY,                        XK_Return,  zoom,           {0}},
-    {MODKEY,                        XK_Tab,     view,           {0}},
+    {MODKEY,                        XK_Tab,     viewtag,        {.i = +1}},
+    {MODKEY | ShiftMask,            XK_Tab,     viewtag,        {.i = -1}},
     {MODKEY | ShiftMask,            XK_c,       killclient,     {0}},
     {MODKEY,                        XK_t,       setlayout,      {.v = &layouts[0]}},
     {MODKEY,                        XK_f,       setlayout,      {.v = &layouts[1]}},
