@@ -40,7 +40,7 @@ static const Rule rules[] = {
     {"org.mozilla.firefox",   NULL,             NULL,       1 << 0,     0,          -1},
     {NULL,                    "vivaldi-stable", NULL,       1 << 0,     0,          -1},
     {"chatgpt.com",           NULL,             NULL,       0,          0,          -1},
-    {"nvim-project",          NULL,             NULL,       1 << 1,     0,          -1},
+    {"tabbed",          "nvim-project",             NULL,       1 << 1,     0,          -1},
     {"st-256color",           NULL,             NULL,       1 << 2,     0,          -1},
     {"cantata",               NULL,             NULL,       1 << 3,     0,          -1},
 };
@@ -139,6 +139,7 @@ static const Key keys[] = {
     {MODKEY,                        XK_space,   setlayout,      {0}},
     {MODKEY | ShiftMask,            XK_space,   togglefloating, {0}},
     {MODKEY,                        XK_0,       view,           {.ui = ~0}},
+    {MODKEY,                        XK_Escape,  hideall,        {0}},
     {MODKEY | ShiftMask,            XK_0,       tag,            {.ui = ~0}},
     {MODKEY,                        XK_comma,   focusmon,       {.i = -1}},
     {MODKEY,                        XK_period,  focusmon,       {.i = +1}},

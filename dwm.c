@@ -237,6 +237,7 @@ static void spawn(const Arg *arg);
 static void tag(const Arg *arg);
 static void tagmon(const Arg *arg);
 static void tile(Monitor *m);
+static void hideall(const Arg *arg);
 static void togglebar(const Arg *arg);
 static void togglefloating(const Arg *arg);
 static void toggletag(const Arg *arg);
@@ -1849,7 +1850,16 @@ void toggletag(const Arg *arg) {
   }
 }
 
-void toggleview(const Arg *arg) {
+void
+hideall(const Arg *arg) {
+	selmon->seltags ^= 1;
+	selmon->tagset[selmon->seltags] = 0;
+	focus(NULL);
+	arrange(selmon);
+}
+
+void
+toggleview(const Arg *arg) {
   unsigned int newtagset =
       selmon->tagset[selmon->seltags] ^ (arg->ui & TAGMASK);
 
