@@ -787,6 +787,62 @@ drawstatusbar(Monitor *m, int bh, char* stext) {
 					int rh = atoi(text + ++i);
 
 					drw_rect(drw, rx + x, ry, rw, rh, 1, 0);
+				} else if (text[i] == 't') {
+					int tx = atoi(text + ++i);
+					while (text[++i] != ',');
+					int ty = atoi(text + ++i);
+					while (text[++i] != ',');
+					int tw = atoi(text + ++i);
+					while (text[++i] != ',');
+					int th = atoi(text + ++i);
+					while (text[++i] != ',');
+					int tdir = atoi(text + ++i);
+
+					XPoint points[3];
+					if (tdir == 0) {
+						points[0].x = tx + x;
+						points[0].y = ty + th;
+						points[1].x = tx + x + tw / 2;
+						points[1].y = ty;
+						points[2].x = tx + x + tw;
+						points[2].y = ty + th;
+					} else if (tdir == 1) {
+						points[0].x = tx + x;
+						points[0].y = ty;
+						points[1].x = tx + x + tw / 2;
+						points[1].y = ty + th;
+						points[2].x = tx + x + tw;
+						points[2].y = ty;
+					} else if (tdir == 2) {
+						points[0].x = tx + x + tw;
+						points[0].y = ty;
+						points[1].x = tx + x + tw;
+						points[1].y = ty + th;
+						points[2].x = tx + x;
+						points[2].y = ty + th / 2;
+					} else if (tdir == 4) {
+						points[0].x = tx + x;
+						points[0].y = ty + th;
+						points[1].x = tx + x + tw;
+						points[1].y = ty + th;
+						points[2].x = tx + x + tw;
+						points[2].y = ty;
+					} else if (tdir == 5) {
+						points[0].x = tx + x;
+						points[0].y = ty;
+						points[1].x = tx + x + tw;
+						points[1].y = ty;
+						points[2].x = tx + x;
+						points[2].y = ty + th;
+					} else {
+						points[0].x = tx + x;
+						points[0].y = ty;
+						points[1].x = tx + x;
+						points[1].y = ty + th;
+						points[2].x = tx + x + tw;
+						points[2].y = ty + th / 2;
+					}
+					drw_polygon(drw, points, 3, 1, 0);
 				} else if (text[i] == 'f') {
 					x += atoi(text + ++i);
 				}

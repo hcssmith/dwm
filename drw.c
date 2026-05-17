@@ -244,6 +244,18 @@ drw_rect(Drw *drw, int x, int y, unsigned int w, unsigned int h, int filled, int
 		XDrawRectangle(drw->dpy, drw->drawable, drw->gc, x, y, w - 1, h - 1);
 }
 
+void
+drw_polygon(Drw *drw, XPoint *points, int npoints, int filled, int invert)
+{
+	if (!drw || !drw->scheme || !points || npoints < 3)
+		return;
+	XSetForeground(drw->dpy, drw->gc, invert ? drw->scheme[ColBg].pixel : drw->scheme[ColFg].pixel);
+	if (filled)
+		XFillPolygon(drw->dpy, drw->drawable, drw->gc, points, npoints, Convex, CoordModeOrigin);
+	else
+		XDrawLines(drw->dpy, drw->drawable, drw->gc, points, npoints, CoordModeOrigin);
+}
+
 int
 drw_text(Drw *drw, int x, int y, unsigned int w, unsigned int h, unsigned int lpad, const char *text, int invert)
 {
