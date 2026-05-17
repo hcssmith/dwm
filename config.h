@@ -80,7 +80,6 @@ static const char *applauncher[] =  {"app-launcher.sh", "-m", dmenumon, "-fn", d
 static const char *systemcmd[] =    {"system.sh",       "-m", dmenumon, "-fn", dmenufont, "-nb", col_gray1, "-nf", col_gray4, "-sb", col_cyan, "-sf", col_gray4, NULL};
 static const char *wificmd[] =      {"wifi.sh",         "-m", dmenumon, "-fn", dmenufont, "-nb", col_gray1, "-nf", col_gray4, "-sb", col_cyan, "-sf", col_gray4, NULL};
 static const char *srccmd[] =       {"src-projects.sh", "-m", dmenumon, "-fn", dmenufont, "-nb", col_gray1, "-nf", col_gray4, "-sb", col_cyan, "-sf", col_gray4, NULL};
-static const char *browsercmd[] =   {"surf-open.sh", "https://ddg.gg/", NULL};
 static const char *termcmd[] =      {"st", NULL};
 static const char *wallpaper[] =    {"wallpaper.sh", NULL};
 static const char *volup[] =        {"amixer", "sset", "Master", "5%+", NULL};
@@ -115,7 +114,7 @@ static const Key keys[] = {
     {MODKEY,                        XK_r,       spawn,          {.v = wallpaper}},
     {MODKEY,                        XK_q,       spawn,          {.v = systemcmd}},
     {MODKEY,                        XK_w,       spawn,          {.v = wificmd}},
-    {MODKEY,                        XK_b,       spawn,          {.v = browsercmd}},
+    {MODKEY,                        XK_b,       togglebar,      {0}},
     {MODKEY,                        XK_s,       spawn,          {.v = srccmd}},
     {MODKEY | ShiftMask,            XK_l,       spawn,          {.v = lockcmd}},
     {0,                XF86XK_AudioLowerVolume, spawn,          {.v = voldown}},

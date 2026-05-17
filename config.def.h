@@ -115,7 +115,7 @@ static const Key keys[] = {
     {MODKEY,                        XK_r,       spawn,          {.v = wallpaper}},
     {MODKEY,                        XK_q,       spawn,          {.v = systemcmd}},
     {MODKEY,                        XK_w,       spawn,          {.v = wificmd}},
-    {MODKEY,                        XK_b,       spawn,          {.v = browsercmd}},
+    {MODKEY,                        XK_b,       togglebar,      {0}},
     {MODKEY,                        XK_s,       spawn,          {.v = srccmd}},
     {MODKEY | ShiftMask,            XK_l,       spawn,          {.v = lockcmd}},
     {0,                XF86XK_AudioLowerVolume, spawn,          {.v = voldown}},

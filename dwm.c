@@ -1818,10 +1818,11 @@ void tile(Monitor *m) {
 
 void togglebar(const Arg *arg) {
   selmon->showbar = !selmon->showbar;
-  // updatebarpos(selmon);
   updatebarpos(selmon);
-  XMoveResizeWindow(dpy, selmon->barwin, selmon->wx, selmon->by, selmon->ww,
-                    bh + barheight);
+  if (selmon->showbar)
+    XMapWindow(dpy, selmon->barwin);
+  else
+    XUnmapWindow(dpy, selmon->barwin);
   arrange(selmon);
 }
 
@@ -1947,12 +1948,18 @@ void updatebars(void) {
 
 void updatebarpos(Monitor *m) {
   if (floatbar) {
-    /* IF YOU ARE USING GAPS, PLEASE ADD BARBORDER TO THE END */
-    m->wy = m->my + (barheight + bh + barpadv +
-                     barborder); /* Start window area below the bar */
-    m->wh = m->mh - (barheight + bh + barpadv +
-                     barborder); /* Reduce window height to account for bar */
-    m->by = barpadv;             /* Position bar at vertical padding from top */
+    if (m->showbar) {
+      /* IF YOU ARE USING GAPS, PLEASE ADD BARBORDER TO THE END */
+      m->wy = m->my + (barheight + bh + barpadv +
+                       barborder); /* Start window area below the bar */
+      m->wh = m->mh - (barheight + bh + barpadv +
+                       barborder); /* Reduce window height to account for bar */
+      m->by = barpadv;             /* Position bar at vertical padding from top */
+    } else {
+      m->wy = m->my;
+      m->wh = m->mh;
+      m->by = -bh - barheight;
+    }
   } else {
     m->wy = m->my;
     m->wh = m->mh;
