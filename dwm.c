@@ -147,6 +147,7 @@ struct Monitor {
   unsigned int seltags;
   unsigned int sellt;
   unsigned int tagset[2];
+  unsigned int hiddentags; /* saved tags before hideall */
   int showbar;
   int topbar;
   Client *clients;
@@ -1853,8 +1854,17 @@ void toggletag(const Arg *arg) {
 
 void
 hideall(const Arg *arg) {
-	selmon->seltags ^= 1;
-	selmon->tagset[selmon->seltags] = 0;
+	if (selmon->tagset[selmon->seltags] == 0 && selmon->hiddentags) {
+		/* restore previously hidden tags */
+		selmon->seltags ^= 1;
+		selmon->tagset[selmon->seltags] = selmon->hiddentags;
+		selmon->hiddentags = 0;
+	} else {
+		/* save current tags, then hide */
+		selmon->hiddentags = selmon->tagset[selmon->seltags];
+		selmon->seltags ^= 1;
+		selmon->tagset[selmon->seltags] = 0;
+	}
 	focus(NULL);
 	arrange(selmon);
 }
