@@ -10,7 +10,7 @@ static const unsigned int barborder = 0;
 static const unsigned int floatbar =
     1; /* 0 means bar won't float; float or dock the bar */
 static const unsigned int snap = 32; /* snap pixel */
-static const int showbar = 1;        /* 0 means no bar */
+static const int showbar = 0;        /* 0 means no bar */
 static const int topbar = 1;         /* 0 means bottom bar */
 static const char *fonts[] = {
     "SauceCodePro Nerd Font:size=10:antialias=true:autohint=true"};
